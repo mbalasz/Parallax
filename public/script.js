@@ -27,7 +27,6 @@ let circles = []
 for (let i = 0; i < 200; i++) {
     let xCoord = Math.random() * window.innerWidth;
     let yCoord = Math.random() * window.innerHeight * 2;
-    console.log(xCoord + " " + yCoord);
     let circle = document.createElement("div");
     circle.classList.add("circle")
     circle.style.position = "absolute";
