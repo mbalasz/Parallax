@@ -2,26 +2,6 @@ function vector(x, y, otherX, otherY) {
     return [x - otherX, y - otherY]
 }
 
-class Circle {
-    constructor(originalX, originalY, el) {
-        this.originalX = originalX;
-        this.originalY = originalY;
-        this.el = el;
-    }
-
-    getOriginalX() { 
-        return this.originalX;
-    }
-
-    getOriginalY() {
-        return this.originalY;
-    }
-    
-    getElement() {
-        return this.el;
-    }
-}
-
 let circles = []
 
 for (let i = 0; i < 200; i++) {
@@ -32,13 +12,18 @@ for (let i = 0; i < 200; i++) {
     circle.style.position = "absolute";
     circle.style.left = xCoord;
     circle.style.top = yCoord;
-    circles.push(new Circle(xCoord, yCoord, circle))
+    circles.push(circle)
     document.getElementById('container').appendChild(circle)
 }
 
 document.addEventListener('mousemove', (cursor) => {
     circles.forEach((circle) => {
-        const currVector = vector(cursor.clientX, cursor.clientY, circle.getOriginalX(), circle.getOriginalY())
-        circle.getElement().style.transform = 'translate(' + -(0.08 * currVector[0]) + 'px, ' + -(0.08 * currVector[1]) + 'px)'
+        const currVector = vector(
+            cursor.clientX,
+            cursor.clientY,
+            circle.getBoundingClientRect().left,
+            circle.getBoundingClientRect().top)
+        circle.style.transform = 
+            'translate(' + -(0.08 * currVector[0]) + 'px, ' + -(0.08 * currVector[1]) + 'px)'
     })
 })
